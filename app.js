@@ -69,6 +69,8 @@ document.getElementById('book-form').addEventListener('submit', (e) => {
   } else {
     // Add new book
     ui.addBookToList(book);
+    // Show success message
+    ui.showAlert('Book added successfully.', 'success');
     // Clear input fields
     ui.clearFields();
   }
