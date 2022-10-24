@@ -55,6 +55,7 @@ class UI {
 }
 
 class Store {
+  // Fetch books from local storage
   static getBooks() {
     let books;
     if (localStorage.getItem('books') === null) {
@@ -64,14 +65,28 @@ class Store {
     }
     return books;
   }
-  static displayBooks() { }
+
+  // Display books fetched from local storage
+  static displayBooks() {
+    const books = Store.getBooks();
+    books.forEach((book) => {
+      const ui = new UI();
+      ui.addBookToList(book);
+    });
+  }
+
+  // Add book to local storage
   static addBook(book) {
-    const books = Store.getBooks()
+    const books = Store.getBooks();
     books.push(book);
     localStorage.setItem('books', JSON.stringify(books));
   }
+
+  // Remove books from local storage
   static removeBook() { }
 }
+
+document.addEventListener('DOMContentLoaded', Store.displayBooks);
 
 // Events
 document.getElementById('book-form').addEventListener('submit', (e) => {
